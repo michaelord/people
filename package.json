@@ -1,0 +1,17 @@
+{
+  "name": "people",
+  "private": true,
+  "description": "...",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/michaelord/people.git"
+  },
+  "devDependencies": {
+    "components/editable": "http://github.com/michaelord/editable.git",
+    "components/libs": "http://github.com/michaelord/libs.git"
+  },
+  "author": "michaelord",
+  "keywords": []
+}
