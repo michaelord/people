@@ -1,34 +1,36 @@
-import * as React from 'react';
-
+import {Img} from 'components/media';
+import {getModifiers} from 'components/libs';
+import * as Types from 'components/types';
+import React from 'react';
 import './Avatar.scss';
 
-import {Img, ImgProps} from 'components/editable';
-
-import {getModifiers} from 'components/libs';
+type Status = 'online' | 'offline' | 'away';
 
 export type AvatarProps = {
+	href?: Types.Url;
 	name: string;
-	image?: ImgProps;
-	size?: string;
+	image?: Types.Image;
+	size?: Types.Size;
 	initials?: string;
+	status?: Status;
 };
 
 export const Avatar = (props: AvatarProps) => {
 	const base: string = 'avatar';
 
-	const {name, image, size = '', initials} = props;
+	const {name, image, size = '', initials, status, href} = props;
 
 	const atts = {
 		className: getModifiers(base, {
 			size,
 		}),
+		title: name,
+		href: href || undefined,
 	};
 
-	const status = () => {
-		return null;
+	const presence = status ? <span role="status" className={`${base}__status ${status}`} aria-label="TODO" /> : null;
 
-		// return <span role="status" className={`${base}__status`} aria-label="Active" />
-	};
+	const Component = href ? 'a' : 'span';
 
 	if ((name || initials) && !image) {
 		const label =
@@ -45,9 +47,9 @@ export const Avatar = (props: AvatarProps) => {
 				.join('');
 
 		return (
-			<span {...atts} data-initials={label}>
-				{status()}
-			</span>
+			<Component {...atts} data-initials={label}>
+				{presence}
+			</Component>
 		);
 	}
 
@@ -56,9 +58,11 @@ export const Avatar = (props: AvatarProps) => {
 	}
 
 	return (
-		<span {...atts}>
-			<Img {...image} />
-			{status()}
-		</span>
+		<Component {...atts}>
+			<span className={`${base}__image`}>
+				<Img {...image} />
+			</span>
+			{presence}
+		</Component>
 	);
 };

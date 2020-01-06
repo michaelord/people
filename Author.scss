@@ -17,4 +17,19 @@
 			text-align: left;
 		}
 	}
+
+	&__name {
+		font-weight: 600;
+		text-decoration: none;
+
+		&[href] {
+			&:hover,
+			&:focus {
+				text-decoration: underline;
+			}
+		}
+	}
+	&__role {
+		font-size: 85%;
+	}
 }

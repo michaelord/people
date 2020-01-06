@@ -3,8 +3,9 @@
 
 	--size: 50px;
 
+	transition: all 0.3s;
+
 	display: inline-block;
-	// overflow: hidden;
 	border-radius: 100%;
 	line-height: 1;
 	position: relative;
@@ -12,8 +13,8 @@
 	height: var(--size);
 	line-height: var(--size);
 	vertical-align: middle;
-	background-color: var(--avatar-background-color);
-	color: var(--avatar-color);
+	background-color: var(--accent-color);
+	color: var(--accent-alt);
 	font-style: normal;
 
 	font-size: calc(var(--size) / 3);
@@ -31,6 +32,29 @@
 		display: block;
 	}
 
+	img {
+	}
+
+	&__image {
+		display: block;
+
+		position: relative;
+
+		border-radius: 50%;
+		overflow: hidden;
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			border-radius: 50%;
+			box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+		}
+	}
+
 	&__status {
 		position: absolute;
 		bottom: 0;
@@ -42,25 +66,42 @@
 		transform: translate(-40%, -40%);
 		box-shadow: 0 0 0 2px #fff;
 		background-color: var(--color-error, #ccc);
+		transition: background-color 0.3s;
+
+		&.online {
+			background-color: var(--color-success);
+		}
+
+		&.offline {
+			background-color: var(--color-error);
+		}
+		&.away {
+			background-color: var(--color-warning);
+		}
 	}
 
 	&--md {
 		--size: 80px;
-		/*
-			width: 80px;
-			height: 80px;
-			line-height: 80px;
-			font-size: 20px;
-			*/
 	}
 
 	&--lg {
 		--size: 120px;
+	}
 
-		/*width: 120px;
-			height: 120px;
-			line-height: 120px;
-			font-size: 40px;
-			*/
+	&--xl {
+		--size: 150px;
+	}
+
+	&--2xl {
+		--size: 180px;
+	}
+
+	&[href] {
+		transition: all 0.3s var(--bounce);
+		text-decoration: none;
+
+		&:hover {
+			transform: scale(1.1);
+		}
 	}
 }

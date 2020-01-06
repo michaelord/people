@@ -1,24 +1,19 @@
-import * as React from 'react';
-
+import {Text} from 'components/editable';
+import {getModifiers} from 'components/libs';
+import * as Types from 'components/types';
+import React from 'react';
+import {Avatar, AvatarProps} from './';
 import './Author.scss';
 
-import {ImgProps} from 'components/editable';
-import {Avatar} from './';
-import {getModifiers} from 'components/libs';
-
-export type AvatarProps = {
-	name: string;
-	image?: ImgProps;
-	size?: string;
-	initials?: string;
-	position?: string;
-	hasAvatar?: boolean;
+export type AuthorProps = AvatarProps & {
+	additional?: string;
+	hasAvatar?: Types.TrueFalse;
 };
 
-export const Author = (props: AvatarProps) => {
+export const Author = (props: AuthorProps) => {
 	const base: string = 'author';
 
-	const {position, hasAvatar = true, ...rest} = props;
+	const {additional, href, hasAvatar = true, ...rest} = props;
 	const {name} = props;
 
 	const atts = {className: getModifiers(base, {})};
@@ -26,10 +21,17 @@ export const Author = (props: AvatarProps) => {
 	return (
 		<div {...atts}>
 			<div className={`${base}__main`}>
-				{hasAvatar && <Avatar {...rest} />}
+				{hasAvatar && <Avatar {...rest} href={href} />}
 				<div className={`${base}__detail`}>
-					<span>{name}</span>
-					<span>{position}</span>
+					{href ? (
+						<a href={href} className={`${base}__name`}>
+							<Text content={name} />
+						</a>
+					) : (
+						<Text content={name} className={`${base}__name`} />
+					)}
+
+					<Text content={additional} className={`${base}__role`} />
 				</div>
 			</div>
 		</div>

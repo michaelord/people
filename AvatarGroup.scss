@@ -1,0 +1,39 @@
+.avatar-group {
+	$parent: &;
+
+	display: inline-flex;
+
+	&:not(:last-child) {
+		margin-right: 30px;
+	}
+
+	.avatar {
+		transition: all 0.2s;
+		cursor: pointer;
+
+		~ .avatar {
+			box-shadow: -2px 0 0 0 rgba(0, 0, 0, 0.2);
+		}
+
+		&:not(:first-child) {
+			margin-left: -20px;
+		}
+
+		&:focus-within,
+		&:hover {
+			box-shadow: 0 0 0 3px var(--color-primary-lighter, rgba(0, 0, 0, 0.1));
+
+			&:not(:first-child) {
+				box-shadow: -2px 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 3px var(--color-primary-lighter, rgba(0, 0, 0, 0.1));
+			}
+
+			+ .avatar {
+				box-shadow: rgba(0, 0, 0, 0);
+			}
+
+			~ .avatar {
+				transform: translateX(25px);
+			}
+		}
+	}
+}
